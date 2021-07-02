@@ -44,3 +44,6 @@ spring:
     spring.datasource.filters: stat,wall,log4j
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  messages:
+    basename: i18n/messages
+    encoding: utf-8

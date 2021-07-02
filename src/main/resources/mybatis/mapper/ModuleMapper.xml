@@ -11,4 +11,30 @@
         )
 
     </insert>
+
+    <update id="updateModule">
+        UPDATE `module`
+        SET `name` = #{name, jdbcType=VARCHAR}, `comment` = #{comment, jdbcType=VARCHAR}
+        where `id` = #{id}
+    </update>
+
+    <delete id="deleteModuleById">
+        DELETE
+        FROM `module`
+        WHERE `id` = #{id}
+    </delete>
+
+    <select id="selectModuleByFuzzyName" resultType="com.sugon.cloud.document.entity.Module">
+        SELECT *
+        FROM `module`
+        WHERE `name` LIKE CONCAT('%', #{moduleName}, '%')
+    </select>
+
+    <select id="selectModuleByName" resultType="com.sugon.cloud.document.entity.Module">
+        SELECT *
+        FROM `module`
+        WHERE `name` = #{moduleName}
+    </select>
+
+
 </mapper>
