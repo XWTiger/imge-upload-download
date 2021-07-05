@@ -5,7 +5,7 @@
     <insert id="addContent" parameterType="com.sugon.cloud.document.entity.Content">
         insert into content(`type`,`content`,`model_menu_id`,`deleted`) values(
             #{type,jdbcType=TINYINT},
-            #{content,jdbcType=LONGTEXT},
+            #{content,jdbcType=LONGVARCHAR},
             #{modelMenuId,jdbcType=INTEGER},
             #{deleted,jdbcType=INTEGER}
             )

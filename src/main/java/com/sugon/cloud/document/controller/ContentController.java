@@ -62,7 +62,7 @@ public class ContentController {
     }
 
     @ApiOperation("根据菜单id查询文档内容")
-    @DeleteMapping("/{menu_id}")
+    @GetMapping("/{menu_id}")
     public ResultModel queryContentByModelMenuId(@PathVariable("menu_id") Integer menuId) {
 
         ResultModel resultModel = new ResultModel();
@@ -81,7 +81,7 @@ public class ContentController {
     }
 
     @ApiOperation("根据文件id查询文档内容")
-    @DeleteMapping("/{file_id}")
+    @GetMapping("/{file_id}")
     public ResultModel queryContentById(@PathVariable("file_id") Integer fileId) {
 
         ResultModel resultModel = new ResultModel();
