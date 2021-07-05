@@ -11,6 +11,48 @@
             )
     </insert>
 
+    <select id="getContentById" resultType="com.sugon.cloud.document.entity.Content">
+        select * from content
+        <where>
+            id=#{fileId}
+        </where>
+    </select>
 
+    <select id="getContentByMenuId" resultType="com.sugon.cloud.document.entity.Content">
+        select * from content
+        <where>
+            model_menu_id=#{menuId}
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.sugon.cloud.document.entity.Content">
+        update content
+        <set>
+            type=#{type}
+        </set>
+        <set>
+            content=#{content}
+        </set>
+        <set>
+            model_menu_id=#{modelMenuId}
+        </set>
+        <set>
+            deleted=#{deleted}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+
+    </update>
+
+    <update id="delete">
+        update content
+        <set>
+            deleted=1
+        </set>
+        <where>
+            id=#{fileId}
+        </where>
+    </update>
 
 </mapper>

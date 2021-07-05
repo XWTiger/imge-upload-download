@@ -31,7 +31,7 @@ public class ContentController {
         try {
             contentService.addContent(content);
         } catch (Exception e) {
-            log.error("add content error：{}", e);
+            log.error("add content error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
@@ -43,14 +43,14 @@ public class ContentController {
     }
 
     @ApiOperation("删除文档内容")
-    @DeleteMapping("/{file_id}")
-    public ResultModel deleteContent(@PathVariable("file_id") Integer fileId) {
+    @DeleteMapping("/file/{file_id}")
+    public ResultModel deleteContent(@PathVariable("file_id") String fileId) {
 
         ResultModel resultModel = new ResultModel();
         try {
-            contentService.delete(fileId);
+            contentService.delete(Integer.valueOf(fileId));
         } catch (Exception e) {
-            log.error("delete content error：{}", e);
+            log.error("delete content error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
@@ -62,14 +62,14 @@ public class ContentController {
     }
 
     @ApiOperation("根据菜单id查询文档内容")
-    @GetMapping("/{menu_id}")
-    public ResultModel queryContentByModelMenuId(@PathVariable("menu_id") Integer menuId) {
+    @GetMapping("/menu/{menu_id}")
+    public ResultModel queryContentByModelMenuId(@PathVariable("menu_id") String menuId) {
 
         ResultModel resultModel = new ResultModel();
         try {
-            contentService.getByModelMenuId(menuId);
+            resultModel = contentService.getByModelMenuId(Integer.valueOf(menuId));
         } catch (Exception e) {
-            log.error("query content error：{}", e);
+            log.error("query content error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
@@ -82,11 +82,11 @@ public class ContentController {
 
     @ApiOperation("根据文件id查询文档内容")
     @GetMapping("/{file_id}")
-    public ResultModel queryContentById(@PathVariable("file_id") Integer fileId) {
+    public ResultModel queryContentById(@PathVariable("file_id") String fileId) {
 
         ResultModel resultModel = new ResultModel();
         try {
-            contentService.getById(fileId);
+           resultModel = contentService.getById(Integer.valueOf(fileId));
         } catch (Exception e) {
             log.error("query content error：{}", e);
             resultModel.setStatusCode(0);
