@@ -11,8 +11,10 @@ spring:
   messages:
     basename: i18n/messages
     encoding: utf-8
+    mvc:
+      static-path-pattern: /**
   resources:
-    static-locations: ${image.path}
+    static-locations: "file:${image.path}"
   application:
     name: kubeops-api
   http:

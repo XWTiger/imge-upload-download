@@ -31,7 +31,7 @@ public class ContentController {
         try {
             contentService.addContent(content);
         } catch (Exception e) {
-            log.error("add content error: {}", e);
+            log.error("add content error:", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
@@ -50,7 +50,7 @@ public class ContentController {
         try {
             contentService.delete(Integer.valueOf(fileId));
         } catch (Exception e) {
-            log.error("delete content error: {}", e);
+            log.error("delete content error:", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
@@ -67,9 +67,10 @@ public class ContentController {
 
         ResultModel resultModel = new ResultModel();
         try {
-            resultModel = contentService.getByModelMenuId(Integer.valueOf(menuId));
+           // resultModel = contentService.getByModelMenuId(Integer.valueOf(menuId));
+            throw new Exception("sss");
         } catch (Exception e) {
-            log.error("query content error: {}", e);
+            log.error("query content error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
@@ -88,7 +89,7 @@ public class ContentController {
         try {
            resultModel = contentService.getById(Integer.valueOf(fileId));
         } catch (Exception e) {
-            log.error("query content error：{}", e);
+            log.error("query content error:", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())) {
                 resultModel.setStatusMes(e.getMessage());
