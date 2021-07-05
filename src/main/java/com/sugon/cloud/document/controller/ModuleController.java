@@ -50,7 +50,7 @@ public class ModuleController {
         ResultModel resultModel = new ResultModel();
         try {
             moduleServer.deleteModuleById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("delete module error：" + e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){

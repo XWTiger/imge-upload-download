@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sugon.cloud.document.mapper.ContentMapper" >
+
+    <insert id="addContent" parameterType="com.sugon.cloud.document.entity.Content">
+        insert into content(`type`,`content`,`model_menu_id`,`deleted`) values(
+            #{type,jdbcType=TINYINT},
+            #{content,jdbcType=LONGTEXT},
+            #{modelMenuId,jdbcType=INTEGER},
+            #{deleted,jdbcType=INTEGER}
+            )
+    </insert>
+
+
+
+</mapper>
