@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/module")
-@Api(tags = {"文档信息-顶部模块"},description = " ")
+@RequestMapping("/document/module")
+@Api(tags = {"文档模块接口"},description = " ")
 @Slf4j
 @Validated
 public class ModuleController {
@@ -27,13 +27,13 @@ public class ModuleController {
     private ExceptionService exceptionService;
 
     @PostMapping
-    @ApiOperation("添加顶部模块")
+    @ApiOperation("添加模块")
     public ResultModel createModule(@RequestBody @ApiParam(name = "module") Module module){
         ResultModel resultModel = new ResultModel();
         try {
             moduleServer.addModule(module);
         }catch (Exception e){
-            log.error("add module error：" + e);
+            log.error("add module error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -44,14 +44,14 @@ public class ModuleController {
         return resultModel;
     }
 
-    @DeleteMapping
-    @ApiOperation("删除顶部模块")
-    public ResultModel deleteModule(@RequestParam("id") Integer id){
+    @DeleteMapping("/{id}")
+    @ApiOperation("删除模块")
+    public ResultModel deleteModule(@PathVariable("id") @ApiParam("id") Integer id){
         ResultModel resultModel = new ResultModel();
         try {
             moduleServer.deleteModuleById(id);
-        } catch (Exception e) {
-            log.error("delete module error：" + e);
+        }catch (Exception e){
+            log.error("delete module error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -63,13 +63,13 @@ public class ModuleController {
     }
 
     @PutMapping
-    @ApiOperation("修改顶部模块")
+    @ApiOperation("修改模块")
     public ResultModel updateModule(@RequestBody @ApiParam(name = "module") Module module){
         ResultModel resultModel = new ResultModel();
         try {
             moduleServer.updateModule(module);
         }catch (Exception e){
-            log.error("update module error：" + e);
+            log.error("update module error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -80,17 +80,17 @@ public class ModuleController {
         return resultModel;
     }
 
-    @GetMapping
-    @ApiOperation("查询顶部模块")
+    @GetMapping("/fuzzy/{module_name}")
+    @ApiOperation("模糊查询模块")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "module_name", value = "模块名称", required = true, dataType = "String", paramType = "query")})
-    public ResultModel selectModuleByFuzzyName(@RequestParam("module_name") String moduleName){
+    public ResultModel selectModuleByFuzzyName(@PathVariable("module_name") @ApiParam("module_name") String moduleName){
         ResultModel resultModel = new ResultModel();
         try {
-            List<Module> module = moduleServer.selectModuleByFuzzyName(moduleName);
-            resultModel.setContent(module);
+            List<Module> modules = moduleServer.selectModuleByFuzzyName(moduleName);
+            resultModel.setContent(modules);
         }catch (Exception e){
-            log.error("select module by fuzzy error：" + e);
+            log.error("select modules by fuzzy error: {}", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -101,7 +101,44 @@ public class ModuleController {
         return resultModel;
     }
 
+    @GetMapping("/{id}")
+    @ApiOperation("查询具体模块")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "模块id", required = true, dataType = "Integer", paramType = "query")})
+    public ResultModel selectModuleById(@PathVariable("id") @ApiParam("id") Integer id){
+        ResultModel resultModel = new ResultModel();
+        try {
+            Module module = moduleServer.selectModuleById(id);
+            resultModel.setContent(module);
+        }catch (Exception e){
+            log.error("select module by id error: {}", e);
+            resultModel.setStatusCode(0);
+            if (CommonUtils.isContainChinese(e.getMessage())){
+                resultModel.setStatusMes(e.getMessage());
+            } else {
+                resultModel.setStatusMes(exceptionService.errorMessage("", "module008"));
+            }
+        }
+        return resultModel;
+    }
 
-
+    @GetMapping("/all")
+    @ApiOperation("查询所有模块")
+    public ResultModel selectModule(){
+        ResultModel resultModel = new ResultModel();
+        try {
+            List<Module> modules = moduleServer.selectModules();
+            resultModel.setContent(modules);
+        }catch (Exception e){
+            log.error("select all module error: {}", e);
+            resultModel.setStatusCode(0);
+            if (CommonUtils.isContainChinese(e.getMessage())){
+                resultModel.setStatusMes(e.getMessage());
+            } else {
+                resultModel.setStatusMes(exceptionService.errorMessage("", "module007"));
+            }
+        }
+        return resultModel;
+    }
 
 }

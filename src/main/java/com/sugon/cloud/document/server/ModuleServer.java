@@ -37,4 +37,16 @@ public interface ModuleServer {
      */
     Module selectModuleByName(String moduleName);
 
+    /**
+     * 查询所有模块
+     * @return 所有模块
+     */
+    List<Module> selectModules();
+
+    /**
+     * 查询具体模块
+     * @param id 具体模块id
+     * @return 具体模块
+     */
+    Module selectModuleById(Integer id);
 }

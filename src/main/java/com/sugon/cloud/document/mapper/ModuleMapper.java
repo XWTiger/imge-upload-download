@@ -1,6 +1,7 @@
 package com.sugon.cloud.document.mapper;
 
 import com.sugon.cloud.document.entity.Module;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,4 +39,33 @@ public interface ModuleMapper {
      * @return 查询得到的模块列表
      */
     Module selectModuleByName(String moduleName);
+
+    /**
+     * 查询所有模块
+     * @return 所有模块
+     */
+    List<Module> selectModules();
+
+    /**
+     * 查询该模块名是否已经存在
+     * @param moduleName 模块名
+     * @return 模块名
+     */
+    String selectModuleNameByName(String moduleName);
+
+    /**
+     * 查找其他module是否含有该名称
+     * @param moduleName 名称
+     * @param id 本moduleid
+     * @return 是否含有名称
+     */
+    String selectModuleNameByNameInOrtherModule(@Param("moduleName") String moduleName, @Param("id") Integer id);
+
+    /**
+     * 查询具体模块
+     * @param id 具体模块id
+     * @return 具体模块
+     */
+    Module selectModuleById(Integer id);
+
 }

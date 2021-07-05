@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sugon.cloud.document.mapper.ModuleMenuMapper" >
+    
+    <resultMap id="moduleMenuMap" type="com.sugon.cloud.document.entity.ModuleMenu">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="module_id" property="moduleId" jdbcType="INTEGER" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+        <collection property="moduleMenus" column="id"
+                    select="com.sugon.cloud.document.mapper.ModuleMenuMapper.selectModuleByParentId"/>
+    </resultMap>
+
+    <insert id="addModuleMenu">
+        INSERT INTO
+        `module_menu` (
+          `module_id`, `name`, `parent_id`
+        )
+        VALUES(
+          #{moduleId, jdbcType=INTEGER},
+          #{name, jdbcType=VARCHAR},
+          #{parentId, jdbcType=INTEGER}
+        )
+    </insert>
+
+    <update id="updateModuleMenuById">
+        UPDATE `module_menu`
+        SET `name` = #{newMenuName}
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="deleteModuleMenuById">
+        DELETE
+        FROM `module_menu`
+        WHERE `id` = #{id}
+    </delete>
+
+    <delete id="deleteModuleMenusByIds">
+        DELETE
+        FROM `module_menu`
+        <where>
+            `id` IN
+            <foreach collection="deleteIds" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+
+    <select id="selectMenuByNameInModule" resultType="java.lang.String">
+        SELECT `name`
+        FROM `module_menu`
+        WHERE `name` = #{menuName} AND `module_id` = #{moduleId}
+    </select>
+
+    <select id="selectMenuNameByNameInOtherModule" resultType="java.lang.String">
+        SELECT `name`
+        FROM `module_menu`
+        WHERE `name` = #{newMenuName} AND `module_id` != #{menuId}
+    </select>
+
+    <select id="selectMenuByFuzzyName" resultMap="moduleMenuMap">
+        SELECT *
+        FROM `module_menu`
+        WHERE `name` LIKE CONCAT('%', #{menuName}, '%')
+    </select>
+
+    <select id="selectMenuById" resultMap="moduleMenuMap">
+        SELECT *
+        FROM `module_menu`
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="selectFirstMenusByModuleId" resultMap="moduleMenuMap">
+        SELECT *
+        FROM `module_menu`
+        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
+    </select>
+
+    <select id="selectModuleByParentId" resultMap="moduleMenuMap">
+        SELECT *
+        FROM `module_menu`
+        WHERE `parent_id` = #{parentId}
+    </select>
+
+    <select id="getFirstMenuByModuleId" resultType="java.lang.Integer">
+        SELECT `id`
+        FROM `module_menu`
+        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
+    </select>
+
+</mapper>

@@ -2,9 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sugon.cloud.document.mapper.ModuleMapper" >
 
+    <!--<resultMap id="moduleMap" type="com.sugon.cloud.document.entity.Module">-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="comment" property="comment" jdbcType="VARCHAR" />-->
+        <!--<collection property="menus" column="parent_id"-->
+                    <!--select="com.sugon.cloud.document.mapper.ModuleMapper.selectMenuById"/>-->
+    <!--</resultMap>-->
+
     <insert id="addModule">
-        INSERT INTO  `module`
-        (`name`, `comment`)
+        INSERT INTO
+        `module` (
+          `name`, `comment`
+        )
         VALUES (
           #{name, jdbcType=VARCHAR},
           #{comment, jdbcType=VARCHAR}
@@ -36,5 +46,27 @@
         WHERE `name` = #{moduleName}
     </select>
 
+    <select id="selectModules" resultType="com.sugon.cloud.document.entity.Module">
+        SELECT *
+        FROM `module`
+    </select>
+
+    <select id="selectModuleNameByName" resultType="java.lang.String">
+        SELECT `name`
+        FROM `module`
+        WHERE `name` = #{moduleName}
+    </select>
+
+    <select id="selectModuleNameByNameInOrtherModule" resultType="java.lang.String">
+        SELECT `name`
+        FROM `module`
+        WHERE `name` = #{moduleName} AND `id` != #{id}
+    </select>
+
+    <select id="selectModuleById" resultType="com.sugon.cloud.document.entity.Module">
+        SELECT *
+        FROM `module`
+        WHERE `id` = #{id}
+    </select>
 
 </mapper>
