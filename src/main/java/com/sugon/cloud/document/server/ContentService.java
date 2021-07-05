@@ -22,5 +22,7 @@ public interface ContentService {
 
     void delete(Integer id);
 
+    void deleteByMenuId(Integer menuId);
+
     void update(Content content);
 }

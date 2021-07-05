@@ -62,4 +62,14 @@
         </where>
     </update>
 
+    <update id="deleteByMenuId">
+        update content
+        <set>
+            deleted=1
+        </set>
+        <where>
+            model_menu_id=#{menuId}
+        </where>
+    </update>
+
 </mapper>

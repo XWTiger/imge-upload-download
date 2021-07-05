@@ -11,6 +11,8 @@ spring:
   messages:
     basename: i18n/messages
     encoding: utf-8
+  resources:
+    static-locations: ${image.path}
   application:
     name: kubeops-api
   http:
@@ -48,6 +50,8 @@ spring:
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
+image:
+  path: /opt/img
 swagger:
   title: SugonCloud-Document-Api 接口文档
   description: SugonCloud-CCI-Api 接口文档

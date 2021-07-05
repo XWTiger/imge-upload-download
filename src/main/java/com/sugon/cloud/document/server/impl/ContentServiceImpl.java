@@ -43,6 +43,11 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    public void deleteByMenuId(Integer menuId) {
+        contentMapper.deleteByMenuId(menuId);
+    }
+
+    @Override
     public void update(Content content) {
         contentMapper.update(content);
     }

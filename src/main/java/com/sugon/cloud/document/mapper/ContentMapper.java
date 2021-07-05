@@ -16,4 +16,6 @@ public interface ContentMapper {
     void update(Content content);
 
     void delete(int fileId);
+
+    void deleteByMenuId(Integer menuId);
 }
