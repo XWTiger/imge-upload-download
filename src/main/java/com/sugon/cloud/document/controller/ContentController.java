@@ -67,8 +67,7 @@ public class ContentController {
 
         ResultModel resultModel = new ResultModel();
         try {
-           // resultModel = contentService.getByModelMenuId(Integer.valueOf(menuId));
-            throw new Exception("sss");
+           resultModel = contentService.getByModelMenuId(Integer.valueOf(menuId));
         } catch (Exception e) {
             log.error("query content error: ", e);
             resultModel.setStatusCode(0);

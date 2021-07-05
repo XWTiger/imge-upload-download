@@ -45,6 +45,7 @@ public class ImageController {
                 tempFile.mkdirs();
             }
             os = new FileOutputStream(tempFile.getPath() + File.separator + fileRealName);
+            resultModel.setContent(fileRealName);
             // 开始读取
             while ((len = inputStream.read(bs)) != -1) {
                 os.write(bs, 0, len);
