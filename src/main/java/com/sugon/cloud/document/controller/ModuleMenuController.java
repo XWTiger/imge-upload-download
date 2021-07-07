@@ -31,7 +31,9 @@ public class ModuleMenuController {
     public ResultModel createModuleMenu(@RequestBody @ApiParam(name = "moduleMenu") ModuleMenu moduleMenu){
         ResultModel resultModel = new ResultModel();
         try {
-            moduleMenuServer.addModuleMenu(moduleMenu);
+            Integer id = moduleMenuServer.addModuleMenu(moduleMenu);
+            moduleMenu.setId(id);
+            resultModel.setContent(moduleMenu);
         }catch (Exception e){
             log.error("add moduleMenu error: {}", e);
             resultModel.setStatusCode(0);

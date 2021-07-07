@@ -26,7 +26,7 @@ public interface ModuleMenuMapper {
      * 保存菜单
      * @param moduleMenu 需要保存的菜单
      */
-    void addModuleMenu(ModuleMenu moduleMenu);
+    Integer addModuleMenu(ModuleMenu moduleMenu);
 
     /**
      * 根据id删除菜单，需要删除其子菜单

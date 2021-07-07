@@ -11,7 +11,7 @@
                     select="com.sugon.cloud.document.mapper.ModuleMenuMapper.selectModuleByParentId"/>
     </resultMap>
 
-    <insert id="addModuleMenu">
+    <insert id="addModuleMenu" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
         `module_menu` (
           `module_id`, `name`, `parent_id`

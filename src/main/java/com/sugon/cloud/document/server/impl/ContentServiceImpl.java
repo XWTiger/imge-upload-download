@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @Slf4j
 public class ContentServiceImpl implements ContentService {
@@ -15,8 +17,16 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private ContentMapper contentMapper;
 
+    @Autowired
+    private ExceptionServiceImpl exceptionService;
+
     @Override
-    public void addContent(Content content) {
+    public void addContent(Content content) throws Exception {
+        //校验是否已经有文档内容
+        Content exist = contentMapper.getContentByMenuId(content.getModelMenuId());
+        if (Objects.nonNull(exist)) {
+            throw new Exception(exceptionService.errorMessage("", "fileContent004"));
+        }
         contentMapper.addContent(content);
     }
 

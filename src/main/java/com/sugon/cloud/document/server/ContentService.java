@@ -4,7 +4,7 @@ import com.sugon.cloud.document.entity.Content;
 import com.sugon.cloud.document.entity.model.ResultModel;
 
 public interface ContentService {
-    void addContent(Content content);
+    void addContent(Content content) throws Exception;
 
     /**
      * 通过菜单id 查群对应得内容

@@ -33,7 +33,7 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void addModuleMenu(ModuleMenu moduleMenu) throws Exception {
+    public Integer addModuleMenu(ModuleMenu moduleMenu) throws Exception {
         // 首先判断需要添加的菜单名是否为空
         if (Strings.isNullOrEmpty(moduleMenu.getName())){
             throw new Exception(exceptionService.errorMessage("", "moduleMenu006"));
@@ -44,7 +44,7 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
             throw new Exception(exceptionService.errorMessage("", "moduleMenu005"));
         } else {
             // 没有则保存
-            moduleMenuMapper.addModuleMenu(moduleMenu);
+            return  moduleMenuMapper.addModuleMenu(moduleMenu);
         }
 
     }

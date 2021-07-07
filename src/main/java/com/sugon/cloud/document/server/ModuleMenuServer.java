@@ -11,7 +11,7 @@ public interface ModuleMenuServer {
      * 添加菜单
      * @param moduleMenu 需要添加的菜单
      */
-    void addModuleMenu(ModuleMenu moduleMenu) throws Exception;
+    Integer addModuleMenu(ModuleMenu moduleMenu) throws Exception;
 
     /**
      * 根据id删除菜单，需要删除其子菜单
