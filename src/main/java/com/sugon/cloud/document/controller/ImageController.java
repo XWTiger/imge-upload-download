@@ -134,7 +134,8 @@ public class ImageController {
                 File[] files = file.listFiles();
                 for(int i = 0; i < files.length; ++i){
                     input = new FileInputStream(files[i]);
-                    zipOut.putNextEntry(new ZipEntry(file.getName() + File.separator + files[i].getName()));
+                    String outFilePath = file.getName() + File.separator + files[i].getName();
+                    zipOut.putNextEntry(new ZipEntry(outFilePath.replace("\\", "/")));
                     int temp = 0;
                     while((temp = input.read()) != -1){
                         zipOut.write(temp);
