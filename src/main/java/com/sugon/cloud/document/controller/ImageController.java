@@ -211,7 +211,9 @@ public class ImageController {
             OutputStream output = null;
             while((entry = zipInput.getNextEntry()) != null){
                 log.info("====解压缩 " + entry.getName() + " 文件======");
-                outFile = new File(outzippath + File.separator + entry.getName());
+                String outFilePath = outzippath + File.separator + entry.getName();
+                outFilePath.replace("\\", "/");
+                outFile = new File(outFilePath);
                 if(!outFile.getParentFile().exists()){
                     outFile.getParentFile().mkdir();
                 }
