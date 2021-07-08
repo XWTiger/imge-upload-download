@@ -7,7 +7,7 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="module_id" property="moduleId" jdbcType="INTEGER" />
         <result column="parent_id" property="parentId" jdbcType="INTEGER" />
-        <collection property="moduleMenus" column="id"
+        <collection property="menus" column="id"
                     select="com.sugon.cloud.document.mapper.ModuleMenuMapper.selectModuleByParentId"/>
     </resultMap>
 
@@ -73,7 +73,7 @@
     <select id="selectFirstMenusByModuleId" resultMap="moduleMenuMap">
         SELECT *
         FROM `module_menu`
-        WHERE `module_id` = #{moduleId} AND `parent_id` = null
+        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
     </select>
 
     <select id="selectModuleByParentId" resultMap="moduleMenuMap">
@@ -85,13 +85,13 @@
     <select id="getFirstMenuByModuleId" resultType="java.lang.Integer">
         SELECT `id`
         FROM `module_menu`
-        WHERE `module_id` = #{moduleId} AND `parent_id` = null
+        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
     </select>
 
     <select id="selectFirstMenuByModuleId" resultMap="moduleMenuMap">
         SELECT *
         FROM `module_menu`
-        WHERE `module_id` = #{moduleId} AND `parent_id` = null
+        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
     </select>
 
 </mapper>

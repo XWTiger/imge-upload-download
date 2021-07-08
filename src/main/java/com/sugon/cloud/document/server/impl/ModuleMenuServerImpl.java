@@ -56,7 +56,7 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
         List<Integer> deleteIds = new ArrayList<>();  // 保存需要删除的菜单id
         deleteIds.add(id);
         ModuleMenu moduleMenu = this.selectMenuById(id);  // 得到所有的菜单
-        getDeleteIds(deleteIds, moduleMenu.getModuleMenus());  // 得到所有需要删除的菜单id
+        getDeleteIds(deleteIds, moduleMenu.getMenus());  // 得到所有需要删除的菜单id
         // 首先需要删除菜单下的文档
         for (Integer deleteId : deleteIds) {
             contentService.deleteByMenuId(deleteId);
@@ -72,7 +72,7 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
     private void getDeleteIds(List<Integer> deleteIds, List<ModuleMenu> moduleMenus){
         for (ModuleMenu moduleMenu : moduleMenus) {
             deleteIds.add(moduleMenu.getId());
-            getDeleteIds(deleteIds, moduleMenu.getModuleMenus());
+            getDeleteIds(deleteIds, moduleMenu.getMenus());
         }
     }
 

@@ -26,10 +26,10 @@ public class ModuleMenu {
 
     @JsonProperty("parent_id")
     @ApiModelProperty(value = "父菜单")
-    private Integer parentId;
+    private Integer parentId = 0;
 
-    @JsonProperty("module_menus")
+    @JsonProperty("menus")
     @ApiModelProperty(value = "下面的子菜单", hidden = true)
-    private List<ModuleMenu> moduleMenus;
+    private List<ModuleMenu> menus;
 
 }
