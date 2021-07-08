@@ -75,7 +75,7 @@ public interface ModuleMenuMapper {
      * @param parentId 父id
      * @return 具体菜单
      */
-    ModuleMenu selectModuleByParentId(Integer parentId);
+    List<ModuleMenu> selectModuleByParentId(Integer parentId);
 
     /**
      * 批量删除所有菜单

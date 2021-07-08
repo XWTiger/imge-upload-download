@@ -125,7 +125,7 @@ public class ModuleMenuController {
     }
 
     @GetMapping("/module/{id}")
-    @ApiOperation("通过模块id查询菜单树通过")
+    @ApiOperation("通过模块id查询菜单树")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "菜单id", required = true, dataType = "String", paramType = "query")})
     public ResultModel selectMenuByModuleId(@PathVariable("id") @ApiParam("id") Integer moduleId){

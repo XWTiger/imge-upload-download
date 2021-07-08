@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -109,7 +111,20 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
     @Override
     public List<ModuleMenu> selectByModuleId(Integer moduleId) {
         List<ModuleMenu> list = moduleMenuMapper.selectFirstMenuByModuleId(moduleId);
+        menuTree(list);
+        return list;
+    }
 
-        return null;
+    //递归查找子菜单
+    private void menuTree(List<ModuleMenu> menus) {
+        if (!CollectionUtils.isEmpty(menus)) {
+            for (ModuleMenu menu : menus) {
+                List<ModuleMenu> result = moduleMenuMapper.selectModuleByParentId(menu.getId());
+                if (!CollectionUtils.isEmpty(result)) {
+                    menu.setMenus(result);
+                    menuTree(result);
+                }
+            }
+        }
     }
 }
