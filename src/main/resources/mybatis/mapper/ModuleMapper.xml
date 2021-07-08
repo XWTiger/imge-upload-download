@@ -49,6 +49,12 @@
     <select id="selectModules" resultType="com.sugon.cloud.document.entity.Module">
         SELECT *
         FROM `module`
+        <where>
+            1=1
+            <if test="name != null">
+                `name` LIKE CONCAT('%', #{name}, '%')
+            </if>
+        </where>
     </select>
 
     <select id="selectModuleNameByName" resultType="java.lang.String">

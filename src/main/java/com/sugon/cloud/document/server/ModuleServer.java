@@ -1,6 +1,8 @@
 package com.sugon.cloud.document.server;
 
 import com.sugon.cloud.document.entity.Module;
+import com.sugon.cloud.document.entity.page.PageCL;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -41,7 +43,7 @@ public interface ModuleServer {
      * 查询所有模块
      * @return 所有模块
      */
-    List<Module> selectModules();
+    PageCL<Module> selectModules(int pageSize, int pageNum, String name);
 
     /**
      * 查询具体模块

@@ -1,8 +1,11 @@
 package com.sugon.cloud.document.server.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
 import com.sugon.cloud.document.entity.Module;
 import com.sugon.cloud.document.entity.ModuleMenu;
+import com.sugon.cloud.document.entity.page.PageCL;
 import com.sugon.cloud.document.mapper.ModuleMapper;
 import com.sugon.cloud.document.mapper.ModuleMenuMapper;
 import com.sugon.cloud.document.server.ExceptionService;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Objects;
@@ -98,16 +102,26 @@ public class ModuleServerImpl implements ModuleServer {
     }
 
     @Override
-    public List<Module> selectModules() {
+    public PageCL<Module> selectModules(int pageSize, int pageNum, String name) {
+       /* PageHelper.startPage(pageNum, pageSize);*/
         // 查询模块时需要得到模块下的菜单
-        List<Module> modules = moduleMapper.selectModules();
+        List<Module> modules = moduleMapper.selectModules(name);
         for (Module module : modules) {
             Integer moduleId = module.getId();
             // 得到该模块下所有菜单以及其子菜单
             List<ModuleMenu> moduleMenus = moduleMenuMapper.selectFirstMenusByModuleId(moduleId);
             module.setMenus(moduleMenus);
         }
-        return modules;
+        //分页信息
+        PageInfo<Module> pageInfo = new PageInfo<>(modules);
+        PageCL<Module> pageCL = new PageCL();
+        pageCL.setPageCount(Integer.valueOf(pageInfo.getPages()));
+        pageCL.setTotal(Integer.parseInt(String.valueOf(pageInfo.getTotal())));
+        pageCL.setPageNum(pageNum);
+        pageCL.setPageSize(pageSize);
+        pageCL.setSize(pageSize);
+        pageCL.setList(pageInfo.getList());
+        return pageCL;
     }
 
     @Override

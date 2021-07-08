@@ -44,7 +44,7 @@ public interface ModuleMapper {
      * 查询所有模块
      * @return 所有模块
      */
-    List<Module> selectModules();
+    List<Module> selectModules(String name);
 
     /**
      * 查询该模块名是否已经存在

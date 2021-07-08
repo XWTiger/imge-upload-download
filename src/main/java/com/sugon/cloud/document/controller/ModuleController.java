@@ -2,6 +2,7 @@ package com.sugon.cloud.document.controller;
 
 import com.sugon.cloud.document.entity.Module;
 import com.sugon.cloud.document.entity.model.ResultModel;
+import com.sugon.cloud.document.entity.page.PageCL;
 import com.sugon.cloud.document.server.ExceptionService;
 import com.sugon.cloud.document.server.ModuleServer;
 import com.sugon.cloud.document.utils.CommonUtils;
@@ -124,11 +125,17 @@ public class ModuleController {
 
     @GetMapping("/all")
     @ApiOperation("查询所有模块")
-    public ResultModel selectModule(){
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page_size", value = "每页条数", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "page_num", value = "页数", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "名称", required = false, dataType = "Integer", paramType = "query")
+    })
+    public ResultModel selectModule(@RequestParam("page_size") int pageSize, @RequestParam("page_num") int pageNum, @RequestParam(value = "name", required = false) String name){
         ResultModel resultModel = new ResultModel();
         try {
-            List<Module> modules = moduleServer.selectModules();
+            PageCL<Module> modules = moduleServer.selectModules(pageNum, pageSize, name);
             resultModel.setContent(modules);
+
         }catch (Exception e){
             log.error("select all module error: {}", e);
             resultModel.setStatusCode(0);
