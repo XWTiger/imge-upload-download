@@ -12,6 +12,6 @@ public class HeathyController {
 
     @GetMapping
     public String health() {
-        return "cci service is healthy";
+        return "document service is healthy";
     }
 }

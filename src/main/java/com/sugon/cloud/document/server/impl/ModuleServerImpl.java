@@ -112,7 +112,7 @@ public class ModuleServerImpl implements ModuleServer {
             List<ModuleMenu> moduleMenus = moduleMenuMapper.selectFirstMenusByModuleId(moduleId);
             module.setMenus(moduleMenus);
         }
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageSize, pageNum);
         //分页信息
         PageInfo<Module> pageInfo = new PageInfo<>(modules);
         PageCL<Module> pageCL = new PageCL();
