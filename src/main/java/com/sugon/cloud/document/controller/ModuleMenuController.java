@@ -124,5 +124,26 @@ public class ModuleMenuController {
         return resultModel;
     }
 
+    @GetMapping("/module/{id}")
+    @ApiOperation("通过模块id查询菜单树通过")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "菜单id", required = true, dataType = "String", paramType = "query")})
+    public ResultModel selectMenuByModuleId(@PathVariable("id") @ApiParam("id") Integer moduleId){
+        ResultModel resultModel = new ResultModel();
+        try {
+            List<ModuleMenu> menus = moduleMenuServer.selectByModuleId(moduleId);
+            resultModel.setContent(menus);
+        }catch (Exception e){
+            log.error("select module by id error: {}", e);
+            resultModel.setStatusCode(0);
+            if (CommonUtils.isContainChinese(e.getMessage())){
+                resultModel.setStatusMes(e.getMessage());
+            } else {
+                resultModel.setStatusMes(exceptionService.errorMessage("", "moduleMenu007"));
+            }
+        }
+        return resultModel;
+    }
+
 
 }

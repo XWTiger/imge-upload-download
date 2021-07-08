@@ -73,7 +73,7 @@
     <select id="selectFirstMenusByModuleId" resultMap="moduleMenuMap">
         SELECT *
         FROM `module_menu`
-        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
+        WHERE `module_id` = #{moduleId} AND `parent_id` = null
     </select>
 
     <select id="selectModuleByParentId" resultMap="moduleMenuMap">
@@ -85,7 +85,13 @@
     <select id="getFirstMenuByModuleId" resultType="java.lang.Integer">
         SELECT `id`
         FROM `module_menu`
-        WHERE `module_id` = #{moduleId} AND `parent_id` = 0
+        WHERE `module_id` = #{moduleId} AND `parent_id` = null
+    </select>
+
+    <select id="selectFirstMenuByModuleId" resultMap="moduleMenuMap">
+        SELECT *
+        FROM `module_menu`
+        WHERE `module_id` = #{moduleId} AND `parent_id` = null
     </select>
 
 </mapper>

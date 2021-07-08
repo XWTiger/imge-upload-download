@@ -89,4 +89,6 @@ public interface ModuleMenuMapper {
      * @return 第一次菜单id
      */
     List<Integer> getFirstMenuByModuleId(Integer moduleId);
+
+    List<ModuleMenu> selectFirstMenuByModuleId(Integer moduleId);
 }

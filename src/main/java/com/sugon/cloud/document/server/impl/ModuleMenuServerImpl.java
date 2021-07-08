@@ -105,4 +105,11 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
     public List<Integer> getFirstMenuIdsByModuleId(Integer moduleId) {
         return moduleMenuMapper.getFirstMenuByModuleId(moduleId);
     }
+
+    @Override
+    public List<ModuleMenu> selectByModuleId(Integer moduleId) {
+        List<ModuleMenu> list = moduleMenuMapper.selectFirstMenuByModuleId(moduleId);
+
+        return null;
+    }
 }

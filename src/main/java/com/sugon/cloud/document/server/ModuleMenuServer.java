@@ -46,4 +46,11 @@ public interface ModuleMenuServer {
      * @return 第一次菜单id
      */
     List<Integer> getFirstMenuIdsByModuleId(Integer moduleId);
+
+    /**
+     * 通过模块id查询菜单树
+     * @param moduleId
+     * @return
+     */
+    List<ModuleMenu> selectByModuleId(Integer moduleId);
 }
