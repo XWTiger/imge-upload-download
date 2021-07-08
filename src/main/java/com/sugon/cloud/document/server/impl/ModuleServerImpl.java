@@ -103,7 +103,7 @@ public class ModuleServerImpl implements ModuleServer {
 
     @Override
     public PageCL<Module> selectModules(int pageSize, int pageNum, String name) {
-       /* PageHelper.startPage(pageNum, pageSize);*/
+
         // 查询模块时需要得到模块下的菜单
         List<Module> modules = moduleMapper.selectModules(name);
         for (Module module : modules) {
@@ -112,6 +112,7 @@ public class ModuleServerImpl implements ModuleServer {
             List<ModuleMenu> moduleMenus = moduleMenuMapper.selectFirstMenusByModuleId(moduleId);
             module.setMenus(moduleMenus);
         }
+        PageHelper.startPage(pageNum, pageSize);
         //分页信息
         PageInfo<Module> pageInfo = new PageInfo<>(modules);
         PageCL<Module> pageCL = new PageCL();

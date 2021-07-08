@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/document/module")
@@ -130,9 +131,13 @@ public class ModuleController {
             @ApiImplicitParam(name = "page_num", value = "页数", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "name", value = "名称", required = false, dataType = "Integer", paramType = "query")
     })
-    public ResultModel selectModule(@RequestParam("page_size") int pageSize, @RequestParam("page_num") int pageNum, @RequestParam(value = "name", required = false) String name){
+    public ResultModel selectModule(@RequestParam(value = "page_size", required = false) Integer pageSize, @RequestParam(value = "page_num", required = false) Integer pageNum, @RequestParam(value = "name", required = false) String name){
         ResultModel resultModel = new ResultModel();
         try {
+            if (Objects.isNull(pageNum) || Objects.isNull(pageSize)) {
+                pageNum = 1;
+                pageSize = 10000;
+            }
             PageCL<Module> modules = moduleServer.selectModules(pageNum, pageSize, name);
             resultModel.setContent(modules);
 
