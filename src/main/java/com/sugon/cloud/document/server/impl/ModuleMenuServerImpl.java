@@ -46,6 +46,9 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
             throw new Exception(exceptionService.errorMessage("", "moduleMenu005"));
         } else {
             // 没有则保存
+            if (Objects.isNull(moduleMenu.getParentId())) {
+                moduleMenu.setParentId(0);
+            }
             moduleMenuMapper.addModuleMenu(moduleMenu);
             return moduleMenu.getId();
         }
