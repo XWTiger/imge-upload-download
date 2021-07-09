@@ -25,9 +25,10 @@ public class ContentServiceImpl implements ContentService {
         //校验是否已经有文档内容
         Content exist = contentMapper.getContentByMenuId(content.getModelMenuId());
         if (Objects.nonNull(exist)) {
-            throw new Exception(exceptionService.errorMessage("", "fileContent004"));
+            contentMapper.update(content);
+        } else {
+            contentMapper.addContent(content);
         }
-        contentMapper.addContent(content);
     }
 
     @Override
