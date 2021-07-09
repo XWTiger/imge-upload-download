@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .title("文档服务 接口文档")
                 .description("接口文档")
                 .termsOfServiceUrl("")
-                .version("1.0")
+                .version("2.0")
                 .build();
     }
 
