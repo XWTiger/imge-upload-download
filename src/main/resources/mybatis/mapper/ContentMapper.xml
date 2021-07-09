@@ -35,16 +35,18 @@
     <update id="update" parameterType="com.sugon.cloud.document.entity.Content">
         update content
         <set>
-            type=#{type}
-        </set>
-        <set>
-            content=#{content}
-        </set>
-        <set>
-            model_menu_id=#{modelMenuId}
-        </set>
-        <set>
-            deleted=#{deleted}
+            <if test="type != null">
+                type=#{type},
+            </if>
+            <if test="content != null">
+                content=#{content},
+            </if>
+            <if test="modelMenuId != null">
+                model_menu_id=#{modelMenuId},
+            </if>
+            <if test="deleted != null">
+                deleted=#{deleted},
+            </if>
         </set>
         <where>
             id=#{id}
