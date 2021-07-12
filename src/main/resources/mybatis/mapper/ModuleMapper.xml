@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sugon.cloud.document.mapper.ModuleMapper" >
 
-    <!--<resultMap id="moduleMap" type="com.sugon.cloud.document.entity.Module">-->
-        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
-        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
-        <!--<result column="comment" property="comment" jdbcType="VARCHAR" />-->
-        <!--<collection property="menus" column="parent_id"-->
-                    <!--select="com.sugon.cloud.document.mapper.ModuleMapper.selectMenuById"/>-->
-    <!--</resultMap>-->
+    <resultMap id="moduleMap" type="com.sugon.cloud.document.entity.Module">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="comment" property="comment" jdbcType="VARCHAR" />
+        <result column="catalog_id" property="catalogId"/>
+    </resultMap>
 
     <insert id="addModule">
         INSERT INTO
         `module` (
-          `name`, `comment`
+          `name`, `comment`,`catalog_id`
         )
         VALUES (
           #{name, jdbcType=VARCHAR},
-          #{comment, jdbcType=VARCHAR}
+          #{comment, jdbcType=VARCHAR},
+          #{catalogId, jdbcType=INTEGER}
         )
 
     </insert>
@@ -34,19 +34,19 @@
         WHERE `id` = #{id}
     </delete>
 
-    <select id="selectModuleByFuzzyName" resultType="com.sugon.cloud.document.entity.Module">
+    <select id="selectModuleByFuzzyName" resultMap="moduleMap" >
         SELECT *
         FROM `module`
         WHERE `name` LIKE CONCAT('%', #{moduleName}, '%')
     </select>
 
-    <select id="selectModuleByName" resultType="com.sugon.cloud.document.entity.Module">
+    <select id="selectModuleByName" resultMap="moduleMap">
         SELECT *
         FROM `module`
         WHERE `name` = #{moduleName}
     </select>
 
-    <select id="selectModules" resultType="com.sugon.cloud.document.entity.Module">
+    <select id="selectModules" resultMap="moduleMap">
         SELECT *
         FROM `module`
         <where>
@@ -69,10 +69,16 @@
         WHERE `name` = #{moduleName} AND `id` != #{id}
     </select>
 
-    <select id="selectModuleById" resultType="com.sugon.cloud.document.entity.Module">
+    <select id="selectModuleById" resultMap="moduleMap">
         SELECT *
         FROM `module`
         WHERE `id` = #{id}
+    </select>
+
+    <select id="selectByCatalogId" resultMap="moduleMap">
+        SELECT *
+        FROM `module`
+        WHERE `catalog_id` = #{catalogId}
     </select>
 
 </mapper>
