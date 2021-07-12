@@ -35,7 +35,7 @@ public class ModuleController {
         try {
             moduleServer.addModule(module);
         }catch (Exception e){
-            log.error("add module error: {}", e);
+            log.error("add module error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -53,7 +53,7 @@ public class ModuleController {
         try {
             moduleServer.deleteModuleById(id);
         }catch (Exception e){
-            log.error("delete module error: {}", e);
+            log.error("delete module error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -71,7 +71,7 @@ public class ModuleController {
         try {
             moduleServer.updateModule(module);
         }catch (Exception e){
-            log.error("update module error: {}", e);
+            log.error("update module error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -92,7 +92,7 @@ public class ModuleController {
             List<Module> modules = moduleServer.selectModuleByFuzzyName(moduleName);
             resultModel.setContent(modules);
         }catch (Exception e){
-            log.error("select modules by fuzzy error: {}", e);
+            log.error("select modules by fuzzy error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -113,7 +113,7 @@ public class ModuleController {
             Module module = moduleServer.selectModuleById(id);
             resultModel.setContent(module);
         }catch (Exception e){
-            log.error("select module by id error: {}", e);
+            log.error("select module by id error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -142,7 +142,7 @@ public class ModuleController {
             resultModel.setContent(modules);
 
         }catch (Exception e){
-            log.error("select all module error: {}", e);
+            log.error("select all module error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());

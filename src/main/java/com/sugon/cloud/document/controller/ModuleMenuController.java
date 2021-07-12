@@ -53,7 +53,7 @@ public class ModuleMenuController {
         try {
             moduleMenuServer.deleteModuleMenuById(id);
         }catch (Exception e){
-            log.error("delete moduleMenu error: {}", e);
+            log.error("delete moduleMenu error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -71,7 +71,7 @@ public class ModuleMenuController {
         try {
             moduleMenuServer.updateModuleMenu(id, newMenuName);
         }catch (Exception e){
-            log.error("update moduleMenu error: {}", e);
+            log.error("update moduleMenu error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -92,7 +92,7 @@ public class ModuleMenuController {
             List<ModuleMenu> menus = moduleMenuServer.selectMenuByFuzzyName(menuName);
             resultModel.setContent(menus);
         }catch (Exception e){
-            log.error("select module by fuzzy error: {}", e);
+            log.error("select module by fuzzy error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
@@ -113,7 +113,7 @@ public class ModuleMenuController {
             ModuleMenu menu = moduleMenuServer.selectMenuById(id);
             resultModel.setContent(menu);
         }catch (Exception e){
-            log.error("select module by id error: {}", e);
+            log.error("select module by id error: ", e);
             resultModel.setStatusCode(0);
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
