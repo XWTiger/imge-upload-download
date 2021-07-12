@@ -1,5 +1,6 @@
 package com.sugon.cloud.document.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class Module {
     private String comment;
 
     @ApiModelProperty(value = "种类编号")
+    @JsonProperty("catalog_id")
     private Integer catalogId;
 
     @ApiModelProperty(value = "一个模块下有多个菜单")
