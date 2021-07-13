@@ -32,10 +32,10 @@
            UPDATE `catalog`
            <set>
                 <if test="name != null">
-                    SET `name` = #{name, jdbcType=VARCHAR},
+                     `name` = #{name, jdbcType=VARCHAR},
                 </if>
                 <if test="comment != null">
-                    set `comment` = #{comment, jdbcType=VARCHAR}
+                     `comment` = #{comment, jdbcType=VARCHAR}
                 </if>
            </set>
            where `id` = #{id}
