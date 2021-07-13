@@ -30,7 +30,14 @@
 
        <update id="updateCatalog" >
            UPDATE `catalog`
-           SET `catalog` = #{name, jdbcType=VARCHAR}, `comment` = #{comment, jdbcType=VARCHAR}
+           <set>
+                <if test="name != null">
+                    SET `name` = #{name, jdbcType=VARCHAR},
+                </if>
+                <if test="comment != null">
+                    set `comment` = #{comment, jdbcType=VARCHAR}
+                </if>
+           </set>
            where `id` = #{id}
        </update>
 
