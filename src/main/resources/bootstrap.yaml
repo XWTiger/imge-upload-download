@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  version: 1.0
+# CCI
+
+spring:
+  application:
+    name: sugoncloud-document-api
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 10000MB
+      max-request-size: 10000MB
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 204800MB     #单文件限制
+      max-request-size: 512000MB  #总限制
+  cloud:
+    nacos:
+      discovery:
+        namespace: ${NACOS_NAMESPACE:stable}
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        file-extension: yaml
+      server-addr: ${NACOS_SERVER:172.22.1.7:30501}
+
+
+swagger:
+  title: SugonCloud-Document-Api 接口文档
+  description: SugonCloud-Document-Api 接口文档
+  version: 2.0
+  basePackage: com.sugon.cloud.document
+
+
+
+
