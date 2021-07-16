@@ -25,7 +25,7 @@ public class HeathyController {
 
         int code = 404;
         try {
-            String url = "http://sugoncloud-gateway-http.micro-service.svc.cluster.local:8080/sugoncloud-cci-api/actuator/health";
+            String url = "http://sugoncloud-gateway-http.micro-service.svc.cluster.local:8080/sugoncloud-document-api/actuator/health";
             ResponseEntity<JSONObject> responseEntity = restTemplate.exchange(url, HttpMethod.GET,new HttpEntity<>(new HttpHeaders()),JSONObject.class);
             code = responseEntity.getStatusCode().value();
         } catch (Exception e){
