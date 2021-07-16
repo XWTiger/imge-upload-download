@@ -26,7 +26,7 @@ spring:
       max-file-size: 204800MB     #单文件限制
       max-request-size: 512000MB  #总限制
   datasource:
-    url: jdbc:mysql://172.22.1.7:32760/sugoncloud_guide?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8&useSSL=false
+    url: jdbc:mysql://${mysql.ip}:${mysql.port}/sugoncloud_guide?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8&useSSL=false
     username: root
     password: password
     # 使用druid数据源

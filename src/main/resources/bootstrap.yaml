@@ -24,6 +24,9 @@ spring:
       config:
         namespace: ${spring.cloud.nacos.discovery.namespace}
         file-extension: yaml
+        extension-configs:
+          - data-id: sugoncloud-common-environment.yaml
+            refresh: true
       server-addr: ${NACOS_SERVER:172.22.1.7:30501}
 
 
