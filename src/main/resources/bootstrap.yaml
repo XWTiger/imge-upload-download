@@ -1,8 +1,3 @@
-server:
-  port: 8080
-  version: 1.0
-# CCI
-
 spring:
   application:
     name: sugoncloud-document-api
@@ -20,7 +15,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        namespace: ${NACOS_NAMESPACE:stable}
+        namespace: ${NACOS_NAMESPACE:dev}
       config:
         namespace: ${spring.cloud.nacos.discovery.namespace}
         file-extension: yaml
