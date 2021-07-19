@@ -24,6 +24,19 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.sugon.cloud</groupId>
+            <artifactId>sugoncloud-policy-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>druid</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!--网络层-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
