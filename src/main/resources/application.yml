@@ -9,6 +9,11 @@ mybatis:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+mybatis-plus:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.sugon.cloud.document.entity
+
 
 spring:
   messages:

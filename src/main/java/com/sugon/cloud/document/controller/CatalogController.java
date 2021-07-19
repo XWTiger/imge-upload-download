@@ -99,7 +99,7 @@ public class CatalogController {
             if (CommonUtils.isContainChinese(e.getMessage())){
                 resultModel.setStatusMes(e.getMessage());
             } else {
-                resultModel.setStatusMes(exceptionService.errorMessage("", "catalog004"));
+                resultModel.setStatusMes(exceptionService.errorMessage("", "catalog005"));
             }
         }
         return resultModel;
