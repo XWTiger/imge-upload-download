@@ -29,7 +29,7 @@ swagger:
   title: SugonCloud-Document-Api 接口文档
   description: SugonCloud-Document-Api 接口文档
   version: 2.0
-  basePackage: com.sugon.cloud.document
+  basePackage: com.sugon.cloud
 
 
 
