@@ -210,8 +210,17 @@ public class ImageController {
             ZipEntry entry = null;
             InputStream input = null;
             OutputStream output = null;
+
             while((entry = zipInput.getNextEntry()) != null){
                 log.info("====解压缩 " + entry.getName() + " 文件======");
+                if (entry.isDirectory()) {
+                    //create if don't exist
+                    File directoryFile = new File(outzippath + "/" + entry.getName());
+                    if (!directoryFile.exists()) {
+                        directoryFile.mkdir();
+                    }
+                    continue;
+                }
                 String outFilePath = outzippath + File.separator + entry.getName();
                 outFilePath.replace("\\", "/");
                 outFile = new File(outFilePath);
