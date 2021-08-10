@@ -115,7 +115,7 @@ public class ModuleServerImpl implements ModuleServer {
         PageInfo<Module> pageInfo = new PageInfo<>(modules);
         PageCL<Module> pageCL = new PageCL();
         pageCL.setPageCount(Integer.valueOf(pageInfo.getPages()));
-        pageCL.setTotal(Integer.parseInt(String.valueOf(pageInfo.getTotal())));
+        pageCL.setTotal((int)pageInfo.getTotal());
         pageCL.setPageNum(pageNum);
         pageCL.setPageSize(pageSize);
         pageCL.setSize(pageSize);
