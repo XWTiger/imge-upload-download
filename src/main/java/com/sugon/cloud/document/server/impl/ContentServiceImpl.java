@@ -39,7 +39,7 @@ public class ContentServiceImpl implements ContentService {
             }
         } else {
             Integer id = contentMapper.addContent(content);
-            resultModel.setContent("{\"id\": " + id +"}");
+            resultModel.setContent(content.getId());
             resultModel.setStatusMes("保存成功");
             return resultModel;
         }
