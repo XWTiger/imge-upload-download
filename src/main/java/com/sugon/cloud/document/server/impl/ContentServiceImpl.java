@@ -7,6 +7,7 @@ import com.sugon.cloud.document.server.ContentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -21,7 +22,8 @@ public class ContentServiceImpl implements ContentService {
     private ExceptionServiceImpl exceptionService;
 
     @Override
-    public void addContent(Content content) throws Exception {
+    @Transactional
+    public synchronized void addContent(Content content) throws Exception {
         //校验是否已经有文档内容
         Content exist = contentMapper.getContentByMenuId(content.getModelMenuId());
         if (Objects.nonNull(exist)) {
