@@ -17,10 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ModuleServerImpl implements ModuleServer {
@@ -117,7 +115,7 @@ public class ModuleServerImpl implements ModuleServer {
         PageInfo<Module> pageInfo = new PageInfo<>(modules);
         PageCL<Module> pageCL = new PageCL();
         pageCL.setPageCount(Integer.valueOf(pageInfo.getPages()));
-        pageCL.setTotal(Integer.parseInt(String.valueOf(pageInfo.getTotal())));
+        pageCL.setTotal((int)pageInfo.getTotal());
         pageCL.setPageNum(pageNum);
         pageCL.setPageSize(pageSize);
         pageCL.setSize(pageSize);

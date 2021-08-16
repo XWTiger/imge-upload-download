@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sugon.cloud.document.mapper.CatalogMapper">
+        <resultMap id="moduleMap" type="com.sugon.cloud.document.entity.CatalogEntity">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="name" property="name" jdbcType="VARCHAR" />
+            <result column="comment" property="comment" jdbcType="VARCHAR" />
+            <collection property="modules" column="id"
+            select="com.sugon.cloud.document.mapper.ModuleMapper.selectByCatalogId"/>
+        </resultMap>
+        <select id="list" resultMap="moduleMap">
+            select * from `catalog`
+            <where>
+                <if test="name != null">
+                    `name` LIKE CONCAT('%', #{name}, '%')
+                </if>
+            </where>
+        </select>
+
+        <insert id="addCatalog" parameterType="com.sugon.cloud.document.entity.CatalogEntity">
+            INSERT INTO
+                `catalog` (
+                `name`, `comment`
+            )
+            VALUES (
+                       #{name, jdbcType=VARCHAR},
+                       #{comment, jdbcType=VARCHAR}
+                   )
+        </insert>
+
+       <update id="updateCatalog" >
+           UPDATE `catalog`
+           <set>
+                <if test="name != null">
+                     `name` = #{name, jdbcType=VARCHAR},
+                </if>
+                <if test="comment != null">
+                     `comment` = #{comment, jdbcType=VARCHAR}
+                </if>
+           </set>
+           where `id` = #{id}
+       </update>
+
+        <delete id="deleteCatalog">
+            delete  from `catalog`
+            <where>
+                `id` = #{id}
+            </where>
+        </delete>
+
+    <select id="selectCatalogByName" resultMap="moduleMap">
+        select * from `catalog`
+        <where>
+            name=#{name}
+        </where>
+    </select>
+
+
+    </mapper>

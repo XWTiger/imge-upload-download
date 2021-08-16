@@ -68,4 +68,6 @@ public interface ModuleMapper {
      */
     Module selectModuleById(Integer id);
 
+    List<Module> selectByCatalogId(Integer catalogId);
+
 }

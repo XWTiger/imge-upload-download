@@ -1,7 +1,5 @@
 package com.sugon.cloud.document.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("模块")
-public class Module {
-
+public class CatalogEntity {
     private Integer id;
 
     @ApiModelProperty(value = "名称", required = true)
@@ -23,11 +19,6 @@ public class Module {
     @ApiModelProperty(value = "备注")
     private String comment;
 
-    @ApiModelProperty(value = "种类编号")
-    @JsonProperty("catalog_id")
-    private Integer catalogId;
-
-    @ApiModelProperty(value = "一个模块下有多个菜单")
-    private List<ModuleMenu> menus;
-
+    @ApiModelProperty(value = "模块列表", hidden = true)
+    private List<Module> modules;
 }
