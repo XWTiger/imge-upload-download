@@ -88,8 +88,9 @@ public class ModuleMenuServerImpl implements ModuleMenuServer {
         if (Strings.isNullOrEmpty(newMenuName)){
             throw new Exception(exceptionService.errorMessage("", "moduleMenu006"));
         }
-        // 再判断该菜单名称是否已经被使用，其他菜单是否含有该名称
-        if (!Strings.isNullOrEmpty(moduleMenuMapper.selectMenuNameByNameInOtherModule(newMenuName, id))){
+        // 再判断在该模块下是否含有同名菜单
+        Integer moduleId = moduleMenuMapper.getModuleIdById(id);
+        if (!Strings.isNullOrEmpty(moduleMenuMapper.selectMenuByNameInModule(newMenuName, moduleId))){
             throw new Exception(exceptionService.errorMessage("", "moduleMenu005"));
         }
         // 修改菜单

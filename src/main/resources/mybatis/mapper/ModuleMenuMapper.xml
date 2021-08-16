@@ -55,7 +55,7 @@
     <select id="selectMenuNameByNameInOtherModule" resultType="java.lang.String">
         SELECT `name`
         FROM `module_menu`
-        WHERE `name` = #{newMenuName} AND `module_id` != #{menuId}
+        WHERE `name` = #{newMenuName} AND `module_id` = #{menuId}
     </select>
 
     <select id="selectMenuByFuzzyName" resultMap="moduleMenuMap">
@@ -92,6 +92,12 @@
         SELECT *
         FROM `module_menu`
         WHERE `module_id` = #{moduleId} AND `parent_id` = 0
+    </select>
+
+    <select id="getModuleIdById" resultType="java.lang.Integer">
+        SELECT `module_id`
+        FROM `module_menu`
+        WHERE `id` = #{id}
     </select>
 
 </mapper>

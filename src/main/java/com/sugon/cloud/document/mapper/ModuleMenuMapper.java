@@ -91,4 +91,11 @@ public interface ModuleMenuMapper {
     List<Integer> getFirstMenuByModuleId(Integer moduleId);
 
     List<ModuleMenu> selectFirstMenuByModuleId(Integer moduleId);
+
+    /**
+     * 通过菜单id查找对应的模块id
+     * @param id 菜单id
+     * @return 模块id
+     */
+    Integer getModuleIdById(Integer id);
 }
