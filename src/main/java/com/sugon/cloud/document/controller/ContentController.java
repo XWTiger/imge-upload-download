@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -65,6 +66,10 @@ public class ContentController {
     @ApiOperation("根据菜单id查询文档内容")
     @GetMapping("/menu/{menu_id}")
     public ResultModel queryContentByModelMenuId(@PathVariable("menu_id") String menuId) {
+        if (StringUtils.isEmpty(menuId) || "undefined".equals(menuId)) {
+            log.warn("=== menu id not correct ===");
+            return new ResultModel();
+        }
 
         ResultModel resultModel = new ResultModel();
         try {
