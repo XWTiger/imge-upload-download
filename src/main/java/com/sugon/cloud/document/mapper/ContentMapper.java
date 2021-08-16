@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContentMapper {
 
-    void addContent(Content content);
+    Integer addContent(Content content);
 
     Content getContentById(int fileId);
 

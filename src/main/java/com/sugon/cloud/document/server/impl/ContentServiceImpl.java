@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -23,14 +24,26 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
-    public synchronized void addContent(Content content) throws Exception {
+    public synchronized ResultModel addContent(Content content) throws Exception {
         //校验是否已经有文档内容
+        ResultModel resultModel = new ResultModel<>();
         Content exist = contentMapper.getContentByMenuId(content.getModelMenuId());
         if (Objects.nonNull(exist)) {
-            contentMapper.update(content);
+            if (StringUtils.isEmpty(content.getId())) {
+               resultModel.setStatusCode(0);
+               resultModel.setStatusMes("更新id不能为空");
+               return resultModel;
+            } else {
+                contentMapper.update(content);
+                resultModel.setStatusMes("文档已更新");
+            }
         } else {
-            contentMapper.addContent(content);
+            Integer id = contentMapper.addContent(content);
+            resultModel.setContent("{\"id\": " + id +"}");
+            resultModel.setStatusMes("保存成功");
+            return resultModel;
         }
+        return resultModel;
     }
 
     @Override

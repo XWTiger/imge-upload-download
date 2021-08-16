@@ -9,7 +9,7 @@
         <result column="deleted" property="deleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <insert id="addContent" parameterType="com.sugon.cloud.document.entity.Content">
+    <insert id="addContent" parameterType="com.sugon.cloud.document.entity.Content" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into content(`type`,`content`,`model_menu_id`,`deleted`) values(
             #{type,jdbcType=TINYINT},
             #{content,jdbcType=LONGVARCHAR},

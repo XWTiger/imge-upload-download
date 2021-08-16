@@ -29,9 +29,8 @@ public class ContentController {
     public ResultModel addContent(@RequestBody Content content) {
 
         ResultModel resultModel = new ResultModel();
-        resultModel.setStatusMes("保存成功");
         try {
-            contentService.addContent(content);
+           resultModel = contentService.addContent(content);
         } catch (Exception e) {
             log.error("add content error:", e);
             resultModel.setStatusCode(0);
