@@ -35,6 +35,7 @@ public class ContentServiceImpl implements ContentService {
                return resultModel;
             } else {
                 contentMapper.update(content);
+                resultModel.setContent(content.getId());
                 resultModel.setStatusMes("文档已更新");
             }
         } else {
