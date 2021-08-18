@@ -1,7 +1,9 @@
 package com.sugon.cloud.document.controller;
 
 import com.sugon.cloud.document.entity.model.ResultModel;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,7 +93,10 @@ public class ImageController {
         if (downloadFile.exists()) {
             downloadFile.delete();
         }
+        long startTime = System.currentTimeMillis();
         ZipMultiFile(imagePath, "/opt/img.zip");
+        long endTime = System.currentTimeMillis();
+        log.info("package waste time: {} ms", endTime - startTime);
 
         File file = new File("/opt/img.zip");
         FileInputStream fileInputStream = null;
