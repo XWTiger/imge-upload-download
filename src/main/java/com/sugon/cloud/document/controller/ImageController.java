@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.WritableByteChannel;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -133,20 +136,19 @@ public class ImageController {
         try {
             File file = new File(filepath);// 要被压缩的文件夹
             File zipFile = new File(zippath);
-            InputStream input = null;
+
             ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(zipFile));
             if(file.isDirectory()){
                 File[] files = file.listFiles();
+                //创建写入通道
+                WritableByteChannel writableByteChannel = Channels.newChannel(zipOut);
                 for(int i = 0; i < files.length; ++i){
-                    input = new FileInputStream(files[i]);
-                    String outFilePath = file.getName() + File.separator + files[i].getName();
+                    FileChannel fileChannel = new FileInputStream(files[i]).getChannel();
+                    String outFilePath = file.getPath() + File.separator + files[i].getName();
                     zipOut.putNextEntry(new ZipEntry(outFilePath.replace("\\", "/")));
-                    int temp = 0;
-                    while((temp = input.read()) != -1){
-                        zipOut.write(temp);
-                    }
-                    input.close();
-                }
+                    fileChannel.transferTo(0, fileChannel.size(), writableByteChannel);
+                 }
+                writableByteChannel.close();
             }
             zipOut.close();
         } catch (Exception e) {
