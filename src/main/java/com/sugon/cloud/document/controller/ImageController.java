@@ -203,8 +203,10 @@ public class ImageController {
 
         }
         //解压
+        long startTime = System.currentTimeMillis();
         ZipContraMultiFile("/opt/package.zip", "/opt");
-
+        long endTime = System.currentTimeMillis();
+        log.info("unzip =======waste=======> {} ms", endTime - startTime);
         return resultModel;
     }
 
@@ -222,13 +224,13 @@ public class ImageController {
                 log.info("====解压缩 " + entry.getName() + " 文件======");
                 if (entry.isDirectory()) {
                     //create if don't exist
-                    File directoryFile = new File(outzippath + "/" + entry.getName());
+                    File directoryFile = new File(entry.getName());
                     if (!directoryFile.exists()) {
                         directoryFile.mkdir();
                     }
                     continue;
                 }
-                String outFilePath = outzippath + File.separator + entry.getName();
+                String outFilePath = entry.getName();
                 outFilePath.replace("\\", "/");
                 outFile = new File(outFilePath);
                 if(!outFile.getParentFile().exists()){
@@ -238,11 +240,13 @@ public class ImageController {
                     outFile.createNewFile();
                 }
                 input = zipFile.getInputStream(entry);
+                BufferedInputStream bis = new BufferedInputStream(input);
                 output = new FileOutputStream(outFile);
-                int temp = 0;
-                while((temp = input.read()) != -1){
-                    output.write(temp);
+                byte [] b = new byte[1024 * 1024];
+                while( bis.read(b) != -1){
+                    output.write(b);
                 }
+                bis.close();
                 input.close();
                 output.close();
             }
