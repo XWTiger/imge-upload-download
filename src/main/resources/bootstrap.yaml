@@ -22,6 +22,9 @@ spring:
         extension-configs:
           - data-id: sugoncloud-common-environment.yaml
             refresh: true
+          - data-id: sugoncloud-document-api.yaml
+              # 是否动态刷新，默认false
+            refresh: true
       server-addr: ${NACOS_SERVER:172.22.1.7:30501}
 
 
