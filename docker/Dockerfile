@@ -7,6 +7,10 @@ COPY sugoncloud-document-api.jar /apps
 
 COPY sugoncloud-document-api.conf /apps
 
+COPY  main /opt
+
+RUN   chmod 777 /opt/main
+
 ENV LANG en_US.utf8
 
 CMD ["/apps/sugoncloud-document-api.jar", "start"]

@@ -256,4 +256,29 @@ public class ImageController {
     }
 
 
+
+    @RequestMapping(method = RequestMethod.POST, value = "/useless-drop")
+    @ApiOperation(value = "删除未使用的图片")
+    public ResultModel dropUselessImg() {
+        ResultModel resultModel = new ResultModel();
+        try {
+            String[] cmdA = { "/opt/main"};
+            Process process = Runtime.getRuntime().exec(cmdA);
+            LineNumberReader br = new LineNumberReader(new InputStreamReader(
+                    process.getInputStream()));
+            StringBuffer sb = new StringBuffer();
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                sb.append(line).append("\n");
+            }
+            resultModel.setContent(sb.toString());
+            return resultModel;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
